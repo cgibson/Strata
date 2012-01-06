@@ -6,17 +6,34 @@
 //  Copyright (c) 2011 PDI/DreamWorks Animation. All rights reserved.
 //
 
-#import <QuartzCore/QuartzCore.h>
+#ifndef ENGINE_H
+#define ENGINE_H
 
+class Engine
+{
+public:
+    
+    // CORE
+    Engine(){ _vpWidth = 0; _vpHeight = 0; }
+    virtual ~Engine(){};
+    virtual void init() = 0;
+    
+    // GRAPHICS
+    void setScreen(int width, int height){ _vpWidth = width; _vpHeight = height; }
+    void render(){ pre_frame(); frame(); post_frame(); }
+    void render_and_update(long elapsed){ render(); update(elapsed); }
+    
+    // LOGIC
+    virtual void update(long elapsed) = 0;
+    
+protected:
+    
+    // GRAPHICS
+    virtual void pre_frame() = 0;
+    virtual void post_frame() = 0;
+    virtual void frame() = 0;
+    
+    int _vpWidth, _vpHeight;
+};
 
-@protocol Engine <NSObject>
-
-- (void)render;
-- (void)update;
-- (void)init;
-- (void)teardown;
-- (void)pre_frame;
-- (void)post_frame;
-
-@end
-
+#endif // ENGINE_H

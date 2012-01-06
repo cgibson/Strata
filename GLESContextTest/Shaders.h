@@ -52,9 +52,14 @@
 
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#include <stdio.h>
+#include <string>
+
+using std::string;
 
 /* Shader Utilities */
-GLint compileShader(GLuint *shader, GLenum type, GLsizei count, NSString *file);
+char * getFileContents(string file);
+GLint compileShader(GLuint *shader, GLenum type, GLsizei count, string filepath);
 GLint linkProgram(GLuint prog);
 GLint validateProgram(GLuint prog);
 void destroyShaders(GLuint vertShader, GLuint fragShader, GLuint prog);

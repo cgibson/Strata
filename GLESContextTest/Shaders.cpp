@@ -47,19 +47,52 @@
  
 */
 
-#import "Shaders.h"
+#include "Shaders.h"
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+
+char * getFileContents(string filepath)
+{
+    string outStr;
+    
+    std::ifstream file( filepath.c_str() );
+    
+    if ( file )
+    {
+        char * buffer;
+        
+        file.seekg(0, std::ios::end);
+        std::streampos length = file.tellg();
+        file.seekg(0, std::ios::beg);
+        
+        // Length plus terminator
+        buffer = (char*)malloc(((int)length+1) * sizeof(char));
+        
+        file.read(buffer, length);
+        file.close();
+        
+        // Make sure we have a proper terminator
+        buffer[length] = '\0';
+        return buffer;
+        
+    }
+    
+    return NULL;
+}
 
 /* Create and compile a shader from the provided source(s) */
-GLint compileShader(GLuint *shader, GLenum type, GLsizei count, NSString *file)
+GLint compileShader(GLuint *shader, GLenum type, GLsizei count, string filepath)
 {
 	GLint status;
 	const GLchar *sources;
 	
 	// get source code
-	sources = (GLchar *)[[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil] UTF8String];
+	sources = getFileContents(filepath);
+    printf("***---- SHADER ---***\n%s\n***--- END SHADER ---***\n\n", sources);
 	if (!sources)
 	{
-		NSLog(@"Failed to load vertex shader");
+        perror("Unable to read shader file\n");
 		return 0;
 	}
 	
@@ -74,7 +107,8 @@ GLint compileShader(GLuint *shader, GLenum type, GLsizei count, NSString *file)
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
+        perror("Shader compile log:\n");
+        perror(log);
         free(log);
     }
 #endif
@@ -82,10 +116,10 @@ GLint compileShader(GLuint *shader, GLenum type, GLsizei count, NSString *file)
     glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
     if (status == GL_FALSE)
 	{
-		NSLog(@"Failed to compile shader:\n");
+		perror("Failed to compile shader:\n");
 		int i;
 		for (i = 0; i < count; i++)
-			NSLog(@"%s", (char*)sources[i]);
+			perror((char*)sources[i]);
 	}
 	
 	return status;
@@ -106,14 +140,16 @@ GLint linkProgram(GLuint prog)
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program link log:\n%s", log);
+        perror("Program link log:\n");
+        perror(log);
         free(log);
     }
 #endif
     
     glGetProgramiv(prog, GL_LINK_STATUS, &status);
-    if (status == GL_FALSE)
-		NSLog(@"Failed to link program %d", prog);
+    if (status == GL_FALSE) {
+		perror("Failed to link program");
+    }
 	
 	return status;
 }
@@ -130,13 +166,14 @@ GLint validateProgram(GLuint prog)
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program validate log:\n%s", log);
+        perror("Program validate log:\n");
+        perror(log);
         free(log);
     }
     
     glGetProgramiv(prog, GL_VALIDATE_STATUS, &status);
     if (status == GL_FALSE)
-		NSLog(@"Failed to validate program %d", prog);
+		perror("Failed to validate program");
 	
 	return status;
 }

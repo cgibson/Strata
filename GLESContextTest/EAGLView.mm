@@ -23,8 +23,7 @@
 
 //The GL view is stored in the nib file. When it's unarchived it's sent -initWithCoder:
 - (id) initWithCoder:(NSCoder*)coder
-{    
-    NSLog(@"Initializing with coder");
+{
     if ((self = [super initWithCoder:coder]))
 	{
         // Get the layer
@@ -48,8 +47,6 @@
 		//		return nil;
 		//	}
 		}
-        
-        NSLog(@"Well.. got this far...");
         
 		animating = FALSE;
 		animationFrameInterval = 1;

@@ -10,7 +10,6 @@
 
 #import "EAGLView.h"
 #import "ViewController.h"
-#import "glm/glm.hpp"
 
 @implementation AppDelegate
 
@@ -31,10 +30,6 @@
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
-    glm::vec3 vec = glm::vec3(5.0, 5.0, 5.0);
-    
-    NSLog(@"testing %f", vec.x );
     
     [((EAGLView*)self.viewController.view) startAnimation];
     return YES;
