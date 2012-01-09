@@ -23,7 +23,7 @@ using namespace mesh;
 CompressedTriMesh *meshPtr;
 Texture2D *texPtr;
 
-STEngine::STEngine(void * resourceMngrHandle) {
+STEngine::STEngine(void * resourceMngrHandle, int width, int height): _width(width), _height(height) {
     printf("Building Engine\n");
     _resourceMngrHandle = resourceMngrHandle;
     _rotZ = 0.0f;
@@ -67,6 +67,7 @@ STEngine::init() {
     // OpenGL Stuff
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+    glEnable(GL_DEPTH_TEST);
     glDepthMask(true);
 }
 
@@ -93,12 +94,12 @@ STEngine::frame() {
 	// use shader program
     glUseProgram(_program);
     
-    vec3 eye(0,2.5,-4);
+    vec3 eye(0,2.0,-3);
     vec3 lookAt(0);
     
     mat4 proj, view, modelview, modelviewProj, normal;	
     //proj = glm::ortho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-    proj = glm::perspective(45.0f, 3.0f / 4.0f, 0.1f, 100.0f);
+    proj = glm::perspective(45.0f, (float)_width / (float)_height, 0.1f, 100.0f);
     view = glm::lookAt(eye, lookAt, vec3(0,1,0));
     modelview = glm::rotate(glm::mat4(1.0f), _rotZ, vec3(0,1,0));
     modelviewProj = (proj * view * modelview);
@@ -108,6 +109,7 @@ STEngine::frame() {
     
 	glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX], 1, GL_FALSE, glm::value_ptr(modelviewProj));
 	glUniformMatrix4fv(uniforms[NORMAL_MATRIX], 1, GL_FALSE, glm::value_ptr(normal));
+	glUniformMatrix4fv(uniforms[MODELVIEW_MATRIX], 1, GL_FALSE, glm::value_ptr(view * modelview));
     
     // Set texture 0 to the correct uniform
     GLint baseImageLoc = glGetUniformLocation(_program, "baseTexture");
@@ -117,9 +119,23 @@ STEngine::frame() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texPtr->textureID);
     
-    
     if (meshPtr)
         meshPtr->draw();
+    
+    /*
+    view = glm::translate(view, vec3(0, 0, 3));
+    modelviewProj = (proj * view * modelview);
+    
+    normal = glm::inverse(view * modelview);
+    normal = glm::transpose(normal);
+    
+	glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX], 1, GL_FALSE, glm::value_ptr(modelviewProj));
+	glUniformMatrix4fv(uniforms[NORMAL_MATRIX], 1, GL_FALSE, glm::value_ptr(normal));
+	glUniformMatrix4fv(uniforms[MODELVIEW_MATRIX], 1, GL_FALSE, glm::value_ptr(view * modelview));
+                   
+    if (meshPtr)
+        meshPtr->draw();
+     //*/
     
     glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);
 }
@@ -136,11 +152,16 @@ STEngine::initGlBuffers() {
     printf("Building Gl Buffers\n");
     // Create default framebuffer object.
     glGenFramebuffers(1, &_defaultFramebuffer);
-    glGenRenderbuffers(1, &_colorRenderbuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);
+    
+    glGenRenderbuffers(1, &_colorRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);    
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderbuffer);
     
+    glGenRenderbuffers(1, &_depthRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _width, _height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);
     return true;
 }
 

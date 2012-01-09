@@ -30,7 +30,6 @@
 		1CAEB90A14BA9CC60064773B /* template2.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90914BA9CC60064773B /* template2.vsh */; };
 		1CAEB90C14BA9CD50064773B /* template2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90B14BA9CD50064773B /* template2.fsh */; };
 		1CAEB90E14BAA8D40064773B /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90D14BAA8D40064773B /* sphere.obj */; };
-		1CAEB91014BAC80A0064773B /* ice_melt_ice.tif in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */; };
 		1CAEB91214BAC8A60064773B /* ice_melt_ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB91114BAC8A50064773B /* ice_melt_ice.png */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +73,6 @@
 		1CAEB90914BA9CC60064773B /* template2.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template2.vsh; path = ../../Engine/resources/shaders/template2.vsh; sourceTree = "<group>"; };
 		1CAEB90B14BA9CD50064773B /* template2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template2.fsh; path = ../../Engine/resources/shaders/template2.fsh; sourceTree = "<group>"; };
 		1CAEB90D14BAA8D40064773B /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sphere.obj; path = ../../Engine/resources/obj/sphere.obj; sourceTree = "<group>"; };
-		1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ice_melt_ice.tif; path = ../../Engine/resources/textures/ice_melt_ice.tif; sourceTree = "<group>"; };
 		1CAEB91114BAC8A50064773B /* ice_melt_ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ice_melt_ice.png; path = ../../Engine/resources/textures/ice_melt_ice.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				1CAEB91114BAC8A50064773B /* ice_melt_ice.png */,
-				1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */,
 				1CAEB90D14BAA8D40064773B /* sphere.obj */,
 				1CAEB90714BA92DB0064773B /* bunny.obj */,
 				1CABE0B214B6D5B20031821F /* template.fsh */,
@@ -250,7 +247,6 @@
 				1CAEB90814BA92DB0064773B /* bunny.obj in Resources */,
 				1CAEB90A14BA9CC60064773B /* template2.vsh in Resources */,
 				1CAEB90C14BA9CD50064773B /* template2.fsh in Resources */,
-				1CAEB91014BAC80A0064773B /* ice_melt_ice.tif in Resources */,
 				1CAEB91214BAC8A60064773B /* ice_melt_ice.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +349,7 @@
 				);
 				INFOPLIST_FILE = "ModelViewTest/ModelViewTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -368,6 +365,7 @@
 				);
 				INFOPLIST_FILE = "ModelViewTest/ModelViewTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

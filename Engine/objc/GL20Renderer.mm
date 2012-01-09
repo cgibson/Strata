@@ -29,7 +29,7 @@
 	{
 		context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         resourceMngr = [[ResourceManager alloc] init];
-        engine = new STEngine(resourceMngr);
+        engine = new STEngine(resourceMngr, backingWidth, backingHeight);
         
         // Check to see if the creation of this context was successful
         if (!context || !engine || ![EAGLContext setCurrentContext:context] || !engine->initGlShaders())
@@ -62,6 +62,12 @@
     [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
 	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
+    
+    engine->setWindow(backingWidth, backingHeight);
+    
+    glBindRenderbuffer(GL_RENDERBUFFER, engine->getDepthRenderbuffer());
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, backingWidth, backingHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, engine->getDepthRenderbuffer());
 	
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{

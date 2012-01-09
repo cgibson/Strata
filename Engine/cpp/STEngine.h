@@ -27,7 +27,7 @@
 class STEngine : public Engine
 {
 public:
-    STEngine(void * resourceMngrHandle);
+    STEngine(void * resourceMngrHandle, int width, int height);
     virtual ~STEngine();    
     virtual void init();
     
@@ -39,7 +39,9 @@ public:
     bool initGlShaders();
     
     GLuint getColorRenderbuffer(){ return _colorRenderbuffer; }
+    GLuint getDepthRenderbuffer(){ return _depthRenderbuffer; }
     
+    void setWindow(int width, int height){ _width = width; _height = height; }
 protected:
     
     // GRAPHICS
@@ -47,10 +49,12 @@ protected:
     virtual void frame();
     virtual void post_frame();
     
-	GLuint _defaultFramebuffer, _colorRenderbuffer;
+	GLuint _defaultFramebuffer, _colorRenderbuffer, _depthRenderbuffer;
     
     float _rotZ;
     GLuint _program;
+    
+    int _width, _height;
     
     void * _resourceMngrHandle;
 };
