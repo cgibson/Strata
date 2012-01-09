@@ -3,7 +3,7 @@
 //  GLContextTest
 //
 //  Created by Chris Gibson on 12/17/11.
-//  Copyright (c) 2011 PDI/DreamWorks Animation. All rights reserved.
+//  Copyright (c) 2011 Chris Gibson. All rights reserved.
 //
 
 #ifndef ENGINE_H

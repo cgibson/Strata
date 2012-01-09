@@ -3,7 +3,7 @@
 //  GLContextTest
 //
 //  Created by Chris Gibson on 12/17/11.
-//  Copyright (c) 2011 PDI/DreamWorks Animation. All rights reserved.
+//  Copyright (c) 2011 Chris Gibson. All rights reserved.
 //
 
 #import "GL20Renderer.h"
@@ -38,8 +38,9 @@
             [self release];
             return nil;
         }
-        
         engine->initGlBuffers();
+        
+        engine->init();
 	}
 	
 	return self;

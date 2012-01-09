@@ -19,11 +19,19 @@
 		1CABE0AE14B6D5A10031821F /* STEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CABE0A214B6D5A10031821F /* STEngine.cpp */; };
 		1CABE0AF14B6D5A10031821F /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1CABE0A614B6D5A10031821F /* EAGLView.mm */; };
 		1CABE0B014B6D5A10031821F /* GL20Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1CABE0A814B6D5A10031821F /* GL20Renderer.mm */; };
-		1CABE0B114B6D5A10031821F /* ResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CABE0AC14B6D5A10031821F /* ResourceManager.m */; };
+		1CABE0B114B6D5A10031821F /* ResourceManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1CABE0AC14B6D5A10031821F /* ResourceManager.mm */; };
 		1CABE0B414B6D5B20031821F /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CABE0B214B6D5B20031821F /* template.fsh */; };
 		1CABE0B514B6D5B20031821F /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CABE0B314B6D5B20031821F /* template.vsh */; };
 		1CABE0B714B6D5D20031821F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CABE0B614B6D5D20031821F /* OpenGLES.framework */; };
 		1CABE0B914B6D5DA0031821F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CABE0B814B6D5DA0031821F /* QuartzCore.framework */; };
+		1CAEB90414BA75550064773B /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CAEB90014BA75550064773B /* Loader.cpp */; };
+		1CAEB90514BA75550064773B /* TriMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CAEB90214BA75550064773B /* TriMesh.cpp */; };
+		1CAEB90814BA92DB0064773B /* bunny.obj in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90714BA92DB0064773B /* bunny.obj */; };
+		1CAEB90A14BA9CC60064773B /* template2.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90914BA9CC60064773B /* template2.vsh */; };
+		1CAEB90C14BA9CD50064773B /* template2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90B14BA9CD50064773B /* template2.fsh */; };
+		1CAEB90E14BAA8D40064773B /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90D14BAA8D40064773B /* sphere.obj */; };
+		1CAEB91014BAC80A0064773B /* ice_melt_ice.tif in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */; };
+		1CAEB91214BAC8A60064773B /* ice_melt_ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAEB91114BAC8A50064773B /* ice_melt_ice.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,11 +60,22 @@
 		1CABE0A914B6D5A10031821F /* GLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLRenderer.h; sourceTree = "<group>"; };
 		1CABE0AA14B6D5A10031821F /* ResourceManager-Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ResourceManager-Interface.h"; sourceTree = "<group>"; };
 		1CABE0AB14B6D5A10031821F /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
-		1CABE0AC14B6D5A10031821F /* ResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceManager.m; sourceTree = "<group>"; };
+		1CABE0AC14B6D5A10031821F /* ResourceManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceManager.mm; sourceTree = "<group>"; };
 		1CABE0B214B6D5B20031821F /* template.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template.fsh; path = ../../Engine/resources/shaders/template.fsh; sourceTree = "<group>"; };
 		1CABE0B314B6D5B20031821F /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template.vsh; path = ../../Engine/resources/shaders/template.vsh; sourceTree = "<group>"; };
 		1CABE0B614B6D5D20031821F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		1CABE0B814B6D5DA0031821F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1CAEB90014BA75550064773B /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
+		1CAEB90114BA75550064773B /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
+		1CAEB90214BA75550064773B /* TriMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriMesh.cpp; sourceTree = "<group>"; };
+		1CAEB90314BA75550064773B /* TriMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriMesh.h; sourceTree = "<group>"; };
+		1CAEB90614BA851E0064773B /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		1CAEB90714BA92DB0064773B /* bunny.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bunny.obj; path = ../../Engine/resources/obj/bunny.obj; sourceTree = "<group>"; };
+		1CAEB90914BA9CC60064773B /* template2.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template2.vsh; path = ../../Engine/resources/shaders/template2.vsh; sourceTree = "<group>"; };
+		1CAEB90B14BA9CD50064773B /* template2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template2.fsh; path = ../../Engine/resources/shaders/template2.fsh; sourceTree = "<group>"; };
+		1CAEB90D14BAA8D40064773B /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sphere.obj; path = ../../Engine/resources/obj/sphere.obj; sourceTree = "<group>"; };
+		1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ice_melt_ice.tif; path = ../../Engine/resources/textures/ice_melt_ice.tif; sourceTree = "<group>"; };
+		1CAEB91114BAC8A50064773B /* ice_melt_ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ice_melt_ice.png; path = ../../Engine/resources/textures/ice_melt_ice.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +126,14 @@
 		1CABE08314B6D4DD0031821F /* ModelViewTest */ = {
 			isa = PBXGroup;
 			children = (
+				1CAEB91114BAC8A50064773B /* ice_melt_ice.png */,
+				1CAEB90F14BAC8090064773B /* ice_melt_ice.tif */,
+				1CAEB90D14BAA8D40064773B /* sphere.obj */,
+				1CAEB90714BA92DB0064773B /* bunny.obj */,
 				1CABE0B214B6D5B20031821F /* template.fsh */,
+				1CAEB90B14BA9CD50064773B /* template2.fsh */,
 				1CABE0B314B6D5B20031821F /* template.vsh */,
+				1CAEB90914BA9CC60064773B /* template2.vsh */,
 				1CABE09E14B6D5A10031821F /* cpp */,
 				1CABE0A414B6D5A10031821F /* objc */,
 				1CABE09A14B6D52D0031821F /* AppDelegate.mm */,
@@ -135,11 +160,16 @@
 		1CABE09E14B6D5A10031821F /* cpp */ = {
 			isa = PBXGroup;
 			children = (
+				1CAEB90014BA75550064773B /* Loader.cpp */,
+				1CAEB90114BA75550064773B /* Loader.h */,
+				1CAEB90214BA75550064773B /* TriMesh.cpp */,
+				1CAEB90314BA75550064773B /* TriMesh.h */,
 				1CABE09F14B6D5A10031821F /* Engine.h */,
 				1CABE0A014B6D5A10031821F /* Shaders.cpp */,
 				1CABE0A114B6D5A10031821F /* Shaders.h */,
 				1CABE0A214B6D5A10031821F /* STEngine.cpp */,
 				1CABE0A314B6D5A10031821F /* STEngine.h */,
+				1CAEB90614BA851E0064773B /* Types.h */,
 			);
 			name = cpp;
 			path = ../../Engine/cpp;
@@ -155,7 +185,7 @@
 				1CABE0A914B6D5A10031821F /* GLRenderer.h */,
 				1CABE0AA14B6D5A10031821F /* ResourceManager-Interface.h */,
 				1CABE0AB14B6D5A10031821F /* ResourceManager.h */,
-				1CABE0AC14B6D5A10031821F /* ResourceManager.m */,
+				1CABE0AC14B6D5A10031821F /* ResourceManager.mm */,
 			);
 			name = objc;
 			path = ../../Engine/objc;
@@ -216,6 +246,12 @@
 				1CABE09414B6D4DD0031821F /* ViewController.xib in Resources */,
 				1CABE0B414B6D5B20031821F /* template.fsh in Resources */,
 				1CABE0B514B6D5B20031821F /* template.vsh in Resources */,
+				1CAEB90E14BAA8D40064773B /* sphere.obj in Resources */,
+				1CAEB90814BA92DB0064773B /* bunny.obj in Resources */,
+				1CAEB90A14BA9CC60064773B /* template2.vsh in Resources */,
+				1CAEB90C14BA9CD50064773B /* template2.fsh in Resources */,
+				1CAEB91014BAC80A0064773B /* ice_melt_ice.tif in Resources */,
+				1CAEB91214BAC8A60064773B /* ice_melt_ice.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +269,9 @@
 				1CABE0AE14B6D5A10031821F /* STEngine.cpp in Sources */,
 				1CABE0AF14B6D5A10031821F /* EAGLView.mm in Sources */,
 				1CABE0B014B6D5A10031821F /* GL20Renderer.mm in Sources */,
-				1CABE0B114B6D5A10031821F /* ResourceManager.m in Sources */,
+				1CABE0B114B6D5A10031821F /* ResourceManager.mm in Sources */,
+				1CAEB90414BA75550064773B /* Loader.cpp in Sources */,
+				1CAEB90514BA75550064773B /* TriMesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +391,7 @@
 				1CABE09914B6D4DD0031821F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

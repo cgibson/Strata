@@ -3,7 +3,7 @@
 //  GLESContextTest
 //
 //  Created by Chris Gibson on 1/2/12.
-//  Copyright (c) 2012 PDI/DreamWorks Animation. All rights reserved.
+//  Copyright (c) 2012 Chris Gibson. All rights reserved.
 //
 
 #include "STEngine.h"
@@ -12,22 +12,16 @@
 
 #include <string>
 
-using namespace glm;
+#include "TriMesh.h"
+#include "Loader.h"
+
+#include "Types.h"
+
 using std::string;
 
-// uniform index
-enum {
-	UNIFORM_MODELVIEW_PROJECTION_MATRIX,
-	NUM_UNIFORMS
-};
-GLint uniforms[NUM_UNIFORMS];
-
-// attribute index
-enum {
-	ATTRIB_VERTEX,
-	ATTRIB_COLOR,
-	NUM_ATTRIBUTES
-};
+using namespace mesh;
+CompressedTriMesh *meshPtr;
+Texture2D *texPtr;
 
 STEngine::STEngine(void * resourceMngrHandle) {
     printf("Building Engine\n");
@@ -61,6 +55,19 @@ STEngine::~STEngine() {
 void
 STEngine::init() {
     printf("GETTING STARTED\n");
+    
+    // Load mesh
+    string objFileName = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"sphere", (void*)"obj"));
+    TriMesh tmpMesh = loadObj(objFileName);
+    meshPtr = new CompressedTriMesh(tmpMesh, GL_TRIANGLES);
+    
+    // Load Texture
+    texPtr = cppGetTexture2D((void*)"ice_melt_ice.png");
+    
+    // OpenGL Stuff
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glDepthMask(true);
 }
 
 void
@@ -75,62 +82,51 @@ STEngine::post_frame() {
 
 void
 STEngine::frame() {
-    const GLfloat squareVertices[] = {
-        -0.5f, -0.5f,
-        0.5f,  -0.5f,
-        -0.5f,  0.5f,
-        0.5f,   0.5f,
-    };
-    const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
-    };
     
     glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);
     glViewport(0, 0, _vpWidth, _vpHeight);
     
-    glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
 	
 	// use shader program
     glUseProgram(_program);
     
-    mat4 proj, modelview, modelviewProj;	
-    proj = glm::ortho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-    modelview = glm::rotate(glm::mat4(1.0f), _rotZ, vec3(0,0,1));
-    modelviewProj = (proj * modelview);
-	
-	// update uniform values
+    vec3 eye(0,2.5,-4);
+    vec3 lookAt(0);
+    
+    mat4 proj, view, modelview, modelviewProj, normal;	
+    //proj = glm::ortho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+    proj = glm::perspective(45.0f, 3.0f / 4.0f, 0.1f, 100.0f);
+    view = glm::lookAt(eye, lookAt, vec3(0,1,0));
+    modelview = glm::rotate(glm::mat4(1.0f), _rotZ, vec3(0,1,0));
+    modelviewProj = (proj * view * modelview);
+    
+    normal = glm::inverse(view * modelview);
+    normal = glm::transpose(normal);
+    
 	glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX], 1, GL_FALSE, glm::value_ptr(modelviewProj));
-	
-	// update attribute values
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
-	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, 1, 0, squareColors); //enable the normalized flag
-    glEnableVertexAttribArray(ATTRIB_COLOR);
+	glUniformMatrix4fv(uniforms[NORMAL_MATRIX], 1, GL_FALSE, glm::value_ptr(normal));
+    
+    // Set texture 0 to the correct uniform
+    GLint baseImageLoc = glGetUniformLocation(_program, "baseTexture");
+    glUniform1i(baseImageLoc, 0);
+    
+    // Set to first texture (0)
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texPtr->textureID);
     
     
-	// Validate program before drawing. This is a good check, but only really necessary in a debug build.
-	// DEBUG macro must be defined in your debug configurations if that's not already the case.
-#if defined(DEBUG)
-	if (!validateProgram(_program))
-	{
-		printf("Failed to validate program: %d", _program);
-		return;
-	}
-#endif
-	
-	// draw
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    if (meshPtr)
+        meshPtr->draw();
     
     glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);
 }
 
 void
 STEngine::update(long elapsed) {
-    _rotZ += 3.0f;
+    _rotZ += 0.5f;
 }
 
 
@@ -159,14 +155,14 @@ STEngine::initGlShaders() {
 	_program = glCreateProgram();
 	
 	// create and compile vertex shader
-	vertShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template", (void*)"vsh"));
+	vertShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template2", (void*)"vsh"));
 	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
 		destroyShaders(vertShader, fragShader, _program);
 		return false;
 	}
 	
 	// create and compile fragment shader
-	fragShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template", (void*)"fsh"));
+	fragShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template2", (void*)"fsh"));
 	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
 		destroyShaders(vertShader, fragShader, _program);
 		return false;
@@ -181,7 +177,8 @@ STEngine::initGlShaders() {
 	// bind attribute locations
 	// this needs to be done prior to linking
 	glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-	glBindAttribLocation(_program, ATTRIB_COLOR, "color");
+	glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
+	//glBindAttribLocation(_program, ATTRIB_NORMAL, "uv");
 	
 	// link program
 	if (!linkProgram(_program)) {
@@ -191,6 +188,8 @@ STEngine::initGlShaders() {
 	
 	// get uniform locations
 	uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+	uniforms[NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+	uniforms[MODELVIEW_MATRIX] = glGetUniformLocation(_program, "modelViewMatrix");
 	
 	// release vertex and fragment shaders
 	if (vertShader) {

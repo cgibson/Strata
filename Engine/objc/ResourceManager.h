@@ -3,7 +3,7 @@
 //  GLESContextTest
 //
 //  Created by Chris Gibson on 1/2/12.
-//  Copyright (c) 2012 PDI/DreamWorks Animation. All rights reserved.
+//  Copyright (c) 2012 Chris Gibson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

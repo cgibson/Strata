@@ -119,7 +119,7 @@ GLint compileShader(GLuint *shader, GLenum type, GLsizei count, string filepath)
 		perror("Failed to compile shader:\n");
 		int i;
 		for (i = 0; i < count; i++)
-			perror((char*)sources[i]);
+			printf("%s\n", (char*)sources);
 	}
 	
 	return status;

@@ -3,7 +3,7 @@
 //  GLESContextTest
 //
 //  Created by Chris Gibson on 12/18/11.
-//  Copyright (c) 2011 PDI/DreamWorks Animation. All rights reserved.
+//  Copyright (c) 2011 Chris Gibson. All rights reserved.
 //
 
 #import "AppDelegate.h"
