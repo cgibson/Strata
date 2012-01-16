@@ -28,8 +28,7 @@
 	if (self)
 	{
 		context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        resourceMngr = [[ResourceManager alloc] init];
-        engine = new STEngine(resourceMngr, backingWidth, backingHeight);
+        engine = new STEngine(backingWidth, backingHeight);
         
         // Check to see if the creation of this context was successful
         if (!context || !engine || ![EAGLContext setCurrentContext:context] || !engine->initGlShaders())

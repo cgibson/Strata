@@ -23,8 +23,8 @@ extern "C"
 {
 #endif
 
-    const char * cppGetResourceFilePath(void * self, void * resourceName, void * resourceType);
-    const char * cppGetResourceFileContents(void * self, void * resourceName, void * resourceType);
+    const char * cppGetResourceFilePath(void * resourceName, void * resourceType);
+    const char * cppGetResourceFileContents(void * resourceName, void * resourceType);
     Texture2D * cppGetTexture2D(void * textureName);
     
 // C plus plus boilerplating

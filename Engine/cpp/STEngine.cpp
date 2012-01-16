@@ -23,9 +23,8 @@ using namespace mesh;
 CompressedTriMesh *meshPtr;
 Texture2D *texPtr;
 
-STEngine::STEngine(void * resourceMngrHandle, int width, int height): _width(width), _height(height) {
+STEngine::STEngine(int width, int height): _width(width), _height(height) {
     printf("Building Engine\n");
-    _resourceMngrHandle = resourceMngrHandle;
     _rotZ = 0.0f;
 }
 
@@ -57,7 +56,7 @@ STEngine::init() {
     printf("GETTING STARTED\n");
     
     // Load mesh
-    string objFileName = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"sphere", (void*)"obj"));
+    string objFileName = string(cppGetResourceFilePath((void*)"sphere", (void*)"obj"));
     TriMesh tmpMesh = loadObj(objFileName);
     meshPtr = new CompressedTriMesh(tmpMesh, GL_TRIANGLES);
     
@@ -176,14 +175,14 @@ STEngine::initGlShaders() {
 	_program = glCreateProgram();
 	
 	// create and compile vertex shader
-	vertShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template2", (void*)"vsh"));
+	vertShaderPathname = string(cppGetResourceFilePath((void*)"template2", (void*)"vsh"));
 	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
 		destroyShaders(vertShader, fragShader, _program);
 		return false;
 	}
 	
 	// create and compile fragment shader
-	fragShaderPathname = string(cppGetResourceFilePath(_resourceMngrHandle, (void*)"template2", (void*)"fsh"));
+	fragShaderPathname = string(cppGetResourceFilePath((void*)"template2", (void*)"fsh"));
 	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
 		destroyShaders(vertShader, fragShader, _program);
 		return false;

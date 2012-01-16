@@ -9,20 +9,20 @@
 #import "ResourceManager.h"
 
 
-@implementation ResourceManager
-
-const char* cppGetResourceFilePath(void *self, void* resourceName, void* resourceType)
+const char * cppGetResourceFileContents(void * resourceName, void * resourceType)
 {
-    NSString * path = [(id) self getResourceFilePath:(char*)resourceName type:(char*)resourceType];
+    return NULL;
+    
+}
+
+const char* cppGetResourceFilePath(void * resourceName, void * resourceType)
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:(char*)resourceName] 
+                                                      ofType:[NSString stringWithUTF8String:(char*)resourceType]];
     
     return [path UTF8String];
 }
 
-const char * cppGetResourceFileContents(void * self, void * resourceName, void * resourceType)
-{
-    return NULL;
-
-}
 Texture2D * cppGetTexture2D(void * textureName)
 {
     Texture2D *tex = new Texture2D();
@@ -58,8 +58,8 @@ Texture2D * cppGetTexture2D(void * textureName)
     // Allocate memory for image
     void *imgData = malloc( height * width * 4 );
     CGContextRef imgcontext = CGBitmapContextCreate(
-                                    imgData, width, height, 8, 4 * width, colorSpace,
-                                    kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
+                                                    imgData, width, height, 8, 4 * width, colorSpace,
+                                                    kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
     
     CGColorSpaceRelease( colorSpace );
     CGContextClearRect(imgcontext, CGRectMake(0, 0, width, height));
@@ -79,14 +79,3 @@ Texture2D * cppGetTexture2D(void * textureName)
     
     return tex;
 }
-
-
-- (NSString*) getResourceFilePath: (char*)resourceName type: (char*)resourceType
-{
-    NSString * resourcePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:resourceName] 
-                                                              ofType:[NSString stringWithUTF8String:resourceType]];
-    
-    return resourcePath;
-}
-
-@end

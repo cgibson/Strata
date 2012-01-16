@@ -29,7 +29,7 @@ void main()
     vec3 V = normalize(-posVarying.xyz);
     vec4 specular = specularColor * pow(max(0.0, dot(R, V)), shininess);
     
-    specular = specular * (1.0 - pow(min(diffuse.r * 1.5, 1.0), 3.0));
+    specular = specular * (0.0 + pow(min(diffuse.r * 1.5, 1.0), 3.0));
     
     
     float keyNdL = max(0.0, dot(N, keyLightDir));

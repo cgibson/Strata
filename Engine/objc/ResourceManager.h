@@ -9,8 +9,3 @@
 #import <Foundation/Foundation.h>
 #import "ResourceManager-Interface.h"
 
-@interface ResourceManager : NSObject
-
-- (NSString*) getResourceFilePath: (char*)resourceName type: (char*)resourceType;
-
-@end

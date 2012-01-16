@@ -16,7 +16,6 @@
 {
 @private
 	EAGLContext *context;
-    ResourceManager *resourceMngr;
     STEngine *engine;
 	
 	// The pixel dimensions of the CAEAGLLayer

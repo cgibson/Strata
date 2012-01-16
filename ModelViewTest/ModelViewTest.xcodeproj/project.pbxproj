@@ -45,7 +45,7 @@
 		1CABE08C14B6D4DD0031821F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1CABE08F14B6D4DD0031821F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1CABE09314B6D4DD0031821F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		1CABE09A14B6D52D0031821F /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1CABE09A14B6D52D0031821F /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ../../ModelViewTest/ModelViewTest/AppDelegate.mm; sourceTree = "<group>"; };
 		1CABE09B14B6D52D0031821F /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		1CABE09F14B6D5A10031821F /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		1CABE0A014B6D5A10031821F /* Shaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shaders.cpp; sourceTree = "<group>"; };
@@ -133,7 +133,6 @@
 				1CAEB90914BA9CC60064773B /* template2.vsh */,
 				1CABE09E14B6D5A10031821F /* cpp */,
 				1CABE0A414B6D5A10031821F /* objc */,
-				1CABE09A14B6D52D0031821F /* AppDelegate.mm */,
 				1CABE09B14B6D52D0031821F /* ViewController.mm */,
 				1CABE08C14B6D4DD0031821F /* AppDelegate.h */,
 				1CABE08F14B6D4DD0031821F /* ViewController.h */,
@@ -183,6 +182,7 @@
 				1CABE0AA14B6D5A10031821F /* ResourceManager-Interface.h */,
 				1CABE0AB14B6D5A10031821F /* ResourceManager.h */,
 				1CABE0AC14B6D5A10031821F /* ResourceManager.mm */,
+				1CABE09A14B6D52D0031821F /* AppDelegate.mm */,
 			);
 			name = objc;
 			path = ../../Engine/objc;

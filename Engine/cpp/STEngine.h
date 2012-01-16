@@ -27,7 +27,7 @@
 class STEngine : public Engine
 {
 public:
-    STEngine(void * resourceMngrHandle, int width, int height);
+    STEngine(int width, int height);
     virtual ~STEngine();    
     virtual void init();
     
@@ -55,8 +55,6 @@ protected:
     GLuint _program;
     
     int _width, _height;
-    
-    void * _resourceMngrHandle;
 };
 
 #endif
