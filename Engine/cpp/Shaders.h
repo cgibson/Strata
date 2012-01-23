@@ -50,8 +50,7 @@
 #ifndef SHADERS_H
 #define SHADERS_H
 
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#include "Types.h"
 #include <stdio.h>
 #include <string>
 

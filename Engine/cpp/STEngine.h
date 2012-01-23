@@ -11,16 +11,7 @@
 
 #include "Engine.h"
 // LATER CHANGED TO A COMPILE-TIME DEFINE BASED ON PLATFORM
-#if 1
-
-#include <QuartzCore/QuartzCore.h>
-#include <OpenGLES/ES2/gl.h>
-
-#endif
-
-#import "glm/glm.hpp"
-#import "glm/gtc/matrix_transform.hpp"
-#import "glm/gtc/type_ptr.hpp"
+#include "Types.h"
 
 
 

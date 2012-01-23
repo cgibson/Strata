@@ -9,7 +9,7 @@
 #ifndef GLESContextTest_ResourceManager_Interface_h
 #define GLESContextTest_ResourceManager_Interface_h
 
-#include <OpenGLES/ES2/gl.h>
+#include "Types.h"
 
 typedef struct Texture2D {
     GLuint textureID;

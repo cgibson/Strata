@@ -28,9 +28,9 @@ namespace mesh {
             _vertices[VERT3_INDEX(i, 1)] = vert.y;
             _vertices[VERT3_INDEX(i, 2)] = vert.z;
             
-            _normals[VERT3_INDEX(i, 0)] = vert.x;
-            _normals[VERT3_INDEX(i, 1)] = vert.y;
-            _normals[VERT3_INDEX(i, 2)] = vert.z;
+            _normals[VERT3_INDEX(i, 0)] = normal.x;
+            _normals[VERT3_INDEX(i, 1)] = normal.y;
+            _normals[VERT3_INDEX(i, 2)] = normal.z;
             
             _uvs[VERT2_INDEX(i, 0)] = uv.x;
             _uvs[VERT2_INDEX(i, 1)] = uv.y;

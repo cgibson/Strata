@@ -1,10 +1,10 @@
 #ifndef TRIMESH_H
 #define TRIMESH_H
 
-#import <vector>
+#include <vector>
 
-#import "glm/glm.hpp"
-#import "glm/gtc/type_ptr.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
 #include "Types.h"
 
 using std::vector;

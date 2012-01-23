@@ -59,7 +59,7 @@ namespace mesh {
                 it1--; it2--; it3--; it4--;
                 in1--; in2--; in3--; in4--;
                 
-                if(iv1 < 0 || iv1 >= vertices.size() ||
+                if(iv1 < 0 || iv1 >= (int)vertices.size() ||
                    iv2 < 0 || iv2 >= vertices.size() ||
                    iv3 < 0 || iv3 >= vertices.size() ||
                    iv4 < 0 || iv4 >= vertices.size()) {

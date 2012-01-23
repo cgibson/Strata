@@ -9,7 +9,19 @@
 #ifndef ModelViewTest_Types_h
 #define ModelViewTest_Types_h
 
-#include <OpenGLES/ES2/gl.h>
+#ifdef __APPLE__
+	#include <OpenGLES/ES2/gl.h>
+	#include <QuartzCore/QuartzCore.h>
+#else
+	//#include <GLee.h>
+	//#define GL_GLEXT_PROTOTYPES
+	#include <GL/gl.h>
+	//#include <GL/glext.h>
+#endif
+
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 using namespace glm;
 
