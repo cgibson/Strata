@@ -57,7 +57,7 @@ STEngine::init() {
     
     // Load mesh
     string objFileName = string(cppGetResourceFilePath((void*)"sphere", (void*)"obj"));
-    TriMesh tmpMesh = loadObj(objFileName);
+    TriMesh tmpMesh = loadObj("Engine/resources/obj/sphere.obj");
     meshPtr = new CompressedTriMesh(tmpMesh, GL_TRIANGLES);
     
     // Load Texture
@@ -86,7 +86,7 @@ STEngine::frame() {
     glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);
     glViewport(0, 0, _vpWidth, _vpHeight);
     
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.5f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
 	
@@ -120,7 +120,8 @@ STEngine::frame() {
     
     if (meshPtr)
         meshPtr->draw();
-    
+    else
+    	printf("mesh not ready yet\n");
     /*
     view = glm::translate(view, vec3(0, 0, 3));
     modelviewProj = (proj * view * modelview);

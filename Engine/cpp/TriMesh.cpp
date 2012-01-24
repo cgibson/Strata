@@ -60,6 +60,8 @@ namespace mesh {
         glVertexAttribPointer(ATTRIB_UV, 2, GL_FLOAT, 0, 0, _uvs);
         glEnableVertexAttribArray(ATTRIB_UV);
         
+        printf("COUNT: %d\n", _count);
+
         glDrawArrays(_renderType, 0, _count);
         
     }

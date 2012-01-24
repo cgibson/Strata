@@ -14,7 +14,10 @@ Engine *engine;
 void renderFunction()
 {
 	engine->render_and_update(10);
-    glFlush();
+	glutSwapBuffers();
+
+	printf("RENDERING\n");
+	glutMainLoop();
 }
 
 int main(int argc, char *argv[])
@@ -26,8 +29,9 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 
 	engine = new STEngine(width, height);
+	engine->init();
 
-	glutInitDisplayMode(GLUT_SINGLE);
+	glutInitDisplayMode(GLUT_DOUBLE);
 	glutInitWindowSize(width,height);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("OpenGL - First window demo");

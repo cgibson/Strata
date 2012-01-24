@@ -170,15 +170,23 @@ bool loadPngImage(char *name, int &outWidth, int &outHeight, bool &outHasAlpha, 
 // Code thanks to: http://blog.nobel-joergensen.com/2010/11/07/loading-a-png-as-texture-in-opengl-using-libpng/
 Texture2D * cppGetTexture2D(void * texFilename)
 {
+	Texture2D *texture = new Texture2D();
 	int width, height;
 	bool hasAlpha;
 	GLubyte *textureImage;
 
-    bool success = loadPngImage((char*)texFilename, width, height, hasAlpha, &textureImage);
+	string file = "Engine/resources/textures/";
+	file += (char*)texFilename;
+
+    bool success = loadPngImage(const_cast<char*>(file.c_str()), width, height, hasAlpha, &textureImage);
     if (!success) {
         std::cout << "Unable to load png file" << std::endl;
         return NULL;
     }
+
+    texture->width = width;
+    texture->height = height;
+
     std::cout << "Image loaded " << width << " " << height << " alpha " << hasAlpha << std::endl;
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -192,4 +200,20 @@ Texture2D * cppGetTexture2D(void * texFilename)
     glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_FLAT);
 
+    glGenTextures(1, &texture->textureID); // allocate a texture name
+	glBindTexture(GL_TEXTURE_2D, texture->textureID); // select our current texture
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_DECAL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_DECAL);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);  // when texture area is small, bilinear filter the closest mipmap
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // when texture area is large, bilinear filter the first mipmap
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);  // texture should tile
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//gluBuild2DMipmaps(GL_TEXTURE_2D, 4, texture->width, texture->height, GL_RGBA, GL_UNSIGNED_BYTE, textureImage); // build our texture mipmaps
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureImage);
+
+	delete textureImage;
+
+	return texture;
 }
